@@ -1,4 +1,7 @@
 #include "Configuration.h"
+#include "Exceptions.h"
+#include "DeviceInfo.cuh"
+#include "Calculator.cuh"
 
 int main(int argc, char **argv) {
     config::Configuration conf(config::getArgs(argc, argv));
@@ -7,11 +10,16 @@ int main(int argc, char **argv) {
             config::Configuration::printHelp();
             break;
         case config::CommandType::Info:
+            DeviceInfo::print();
             break;
-        case config::CommandType::TimePoint:
+        case config::CommandType::TimePoint: {
+            Calculator calc(conf);
+            auto answer = calc.exec();
+            cout << answer;
             break;
+        }
         case config::CommandType::Graph:
-            break;
+            throw NotImplementedException();
     }
 
     return 0;

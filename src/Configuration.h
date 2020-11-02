@@ -41,17 +41,15 @@ namespace config {
         float sourceTemp;
         int slices;
 
-        explicit Configuration(const std::vector<std::string>& args);
+        explicit Configuration(const std::vector<std::string> &args);
 
         ~Configuration();
 
         static void printHelp();
 
     private:
-        static CommandType selectCommand(const std::string& cmdString);
+        static CommandType selectCommand(const std::string &cmdString);
     };
-
-
-    #endif //HOTHOTHOT_CONFIGURATION_H
 }
+#endif //HOTHOTHOT_CONFIGURATION_H
 

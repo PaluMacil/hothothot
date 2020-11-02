@@ -10,7 +10,6 @@ mark_as_advanced(
         gtest_disable_pthreads gtest_force_shared_crt gtest_hide_internal_symbols
 )
 
-file(GLOB test_files "*.h" "*.cpp")
-add_executable(${PROJECT_NAME}_run ${test_files})
+add_executable(${PROJECT_NAME}_run Calculator_test.cpp Configuration_test.cpp)
 
 target_link_libraries(${PROJECT_NAME}_run gtest gtest_main ${CMAKE_PROJECT_NAME}_lib)

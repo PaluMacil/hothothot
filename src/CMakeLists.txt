@@ -1,13 +1,10 @@
 set(CMAKE_CUDA_STANDARD 14)
 
-file(GLOB lib_src "*.h" "*.cpp" "*.cu" "*.cuh")
-list(REMOVE_ITEM lib_src "main.cpp")
-
-add_library(${PROJECT_NAME}_lib STATIC ${lib_src})
+add_library(${PROJECT_NAME}_lib STATIC Calculator.cu Calculator.cuh Configuration.cpp Configuration.h DeviceInfo.cu DeviceInfo.cuh Exceptions.cpp Exceptions.h)
 add_executable(${PROJECT_NAME} main.cpp)
 
 set_target_properties(
-        hothothot
+        ${PROJECT_NAME}
         PROPERTIES
         CUDA_SEPARABLE_COMPILATION ON)
 
