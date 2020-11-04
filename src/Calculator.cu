@@ -124,7 +124,7 @@ void Calculator::execCPU(const float *currentArray, float *nextArray) const {
     }
 }
 
-void Calculator::execGPU(const float *currentArray, float *nextArray) {
+void Calculator::execGPU(const float *currentArray, float *nextArray) const {
     const int BLOCK_SIZE = 16;
     dim3 dimBlock(BLOCK_SIZE);
     dim3 dimGrid = (int) ceil((float) this->config.slices / BLOCK_SIZE);
