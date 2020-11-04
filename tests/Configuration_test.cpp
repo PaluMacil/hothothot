@@ -1,6 +1,5 @@
-//
-// Created by dan on 2020-10-27.
-//
+// Configuration_test.cpp
+// Dan Wolf
 
 #include "gtest/gtest.h"
 #include "Configuration.h"

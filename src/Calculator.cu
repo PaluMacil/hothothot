@@ -1,10 +1,10 @@
-//
-// Created by dan on 2020-10-27.
-//
+// Calculator.cu
+// Dan Wolf
 
 #include <cmath>
 #include <iostream>
 #include "Calculator.cuh"
+
 
 // https://stackoverflow.com/questions/14038589/what-is-the-canonical-way-to-check-for-errors-using-the-cuda-runtime-api/14038590#14038590
 #define gpuErrchk(ans) { gpuAssert((ans), __FILE__, __LINE__); }
@@ -66,6 +66,27 @@ Calculator::~Calculator() {
         gpuErrchk(cudaFree(this->array1_d));
         gpuErrchk(cudaFree(this->array2_d));
     }
+}
+
+ObjectSnapshot Calculator::snapshotAt(int time) {
+    bool currentArray1 = true;
+
+    float *snapshotArray;
+
+    for (int i = 0; i < this->config.time + 1; i++) {
+        this->execCPU(
+                currentArray1 ? this->array1 : this->array2,
+                currentArray1 ? this->array2 : this->array1
+        );
+        currentArray1 = !currentArray1;
+        if (i == time) {
+            snapshotArray = currentArray1 ? this->array1 : this->array2;
+        };
+    }
+
+    ObjectSnapshot snapshot(snapshotArray, this->config.slices);
+
+    return snapshot;
 }
 
 float Calculator::exec() {

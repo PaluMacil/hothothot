@@ -1,6 +1,5 @@
-//
-// Created by dan on 2020-10-27.
-//
+// Configuration.cpp
+// Dan Wolf
 
 #include <locale>
 #include "Configuration.h"
@@ -33,6 +32,7 @@ namespace config {
         this->ambientTemp = 23;
         this->sourceTemp = 100;
         this->slices = 2500;
+        this->normalize = false;
 
         for (const auto &arg : args) {
             auto delimPos = arg.find('=');
@@ -68,6 +68,9 @@ namespace config {
             if (key == "SLICES") {
                 this->slices = std::stoi(value);
             }
+            if (key == "NORMALIZE" || key == "N") {
+                this->normalize = value == "TRUE";
+            }
         }
     }
 
@@ -78,6 +81,8 @@ namespace config {
             return CommandType::TimePoint;
         } else if (cmdString == "GRAPH") {
             return CommandType::Graph;
+        } else if (cmdString == "HEAT") {
+            return CommandType::Heat;
         }
         return CommandType::Help;
     }
@@ -95,6 +100,9 @@ namespace config {
         std::printf("\t\t\tSourceTemp (SOURCE): temperature of heat source (default 100)\n");
         std::printf("\t\t\tSlices: the number of slices used (default 2500)\n");
         std::printf("\t\tGraph: outputs to csv for the given point over time\n");
+        std::printf("\t\t\tsame parameters as TimePoint but device is set to CPU\n");
+        std::printf("\t\tHeat: generates a heatmap png for a given time\n");
+        std::printf("\t\t\tNormalize: normalize values of (default false)\n");
         std::printf("\t\t\tsame parameters as TimePoint but device is set to CPU\n");
         std::printf("\t\tHelp: displays this message\n\n");
         std::printf("\tExample:\n\n");

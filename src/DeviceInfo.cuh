@@ -1,6 +1,5 @@
-//
-// Created by dan on 2020-11-01.
-//
+// DeciveInfo.cuh
+// Dan Wolf
 
 #ifndef HOTHOTHOT_DEVICEINFO_CUH
 #define HOTHOTHOT_DEVICEINFO_CUH

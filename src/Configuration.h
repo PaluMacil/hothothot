@@ -1,6 +1,5 @@
-//
-// Created by dan on 2020-10-27.
-//
+// Configuration.h
+// Dan Wolf
 
 #ifndef HOTHOTHOT_CONFIGURATION_H
 #define HOTHOTHOT_CONFIGURATION_H
@@ -18,7 +17,7 @@ namespace config {
     };
 
     enum class CommandType {
-        Info, TimePoint, Graph, Help
+        Info, TimePoint, Graph, Heat, Help
     };
 
     enum class DeviceType {
@@ -40,6 +39,7 @@ namespace config {
         float ambientTemp;
         float sourceTemp;
         int slices;
+        bool normalize;
 
         explicit Configuration(const std::vector<std::string> &args);
 

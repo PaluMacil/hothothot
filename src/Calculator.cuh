@@ -1,12 +1,12 @@
-//
-// Created by dan on 2020-10-27.
-//
+// Calculator.cuh
+// Dan Wolf
 
 #ifndef HOTHOTHOT_CALCULATOR_CUH
 #define HOTHOTHOT_CALCULATOR_CUH
 
 #include <chrono>
 #include "Configuration.h"
+#include "ObjectSnapshot.h"
 
 class Calculator {
 public:
@@ -15,6 +15,7 @@ public:
     ~Calculator();
 
     float exec();
+    ObjectSnapshot snapshotAt(int time);
 
 private:
     config::Configuration config;

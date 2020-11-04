@@ -1,6 +1,5 @@
-//
-// Created by dan on 2020-10-31.
-//
+// Exceptions.cpp
+// Dan Wolf
 
 #ifndef HOTHOTHOT_EXCEPTIONS_H
 #define HOTHOTHOT_EXCEPTIONS_H

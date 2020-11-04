@@ -1,6 +1,5 @@
-//
-// Created by dan on 2020-11-01.
-//
+// Calculator_test.cpp
+// Dan Wolf
 
 #include "gtest/gtest.h"
 #include "Calculator.cuh"
