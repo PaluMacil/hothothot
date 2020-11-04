@@ -55,6 +55,7 @@ Calculator::Calculator(const config::Configuration &config) : config(config) {
                 this->arraySize,
                 cudaMemcpyHostToDevice));
     }
+    this->outputCSV = config.command == config::CommandType::Graph;
 }
 
 Calculator::~Calculator() {
@@ -78,6 +79,17 @@ float Calculator::exec() {
                     currentArray1 ? this->array1 : this->array2,
                     currentArray1 ? this->array2 : this->array1
             );
+
+            // Every 1% of the way through the calculation, output the value at the point requested
+            // output at 0
+            if (this->outputCSV && (i == 0 || i % (this->config.time / 50) == 0)) {
+                auto locationIndex = (int) (this->config.location * (float) this->config.slices);
+                if (currentArray1) {
+                    std::cout << i << ',' << array1[locationIndex] << std::endl;
+                } else {
+                    std::cout << i << ',' << array2[locationIndex] << std::endl;
+                }
+            }
         } else {
             this->execGPU(
                     currentArray1 ? this->array1_d : this->array2_d,
@@ -87,9 +99,11 @@ float Calculator::exec() {
         currentArray1 = !currentArray1;
     }
     this->end = std::chrono::steady_clock::now();
-    std::cout << "Calculation Time (sec): "
-              << (std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()) / 1000000.0
-              << std::endl;
+    if (!this->outputCSV) {
+        std::cout << "Calculation Time (sec): "
+                  << (std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()) / 1000000.0
+                  << std::endl;
+    }
 
     float answer;
     auto i = (int) (this->config.location * (float) this->config.slices);

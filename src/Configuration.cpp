@@ -94,7 +94,8 @@ namespace config {
         std::printf("\t\t\tAmbientTemp (AMBIENT): ambient temperature (default 23)\n");
         std::printf("\t\t\tSourceTemp (SOURCE): temperature of heat source (default 100)\n");
         std::printf("\t\t\tSlices: the number of slices used (default 2500)\n");
-        std::printf("\t\tGraph: displays GPU / CUDA info\n");
+        std::printf("\t\tGraph: outputs to csv for the given point over time\n");
+        std::printf("\t\t\tsame parameters as TimePoint but device is set to CPU\n");
         std::printf("\t\tHelp: displays this message\n\n");
         std::printf("\tExample:\n\n");
         std::printf("\t\thothothot TimePoint L=.7 T=10000000\n");

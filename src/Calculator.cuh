@@ -25,6 +25,7 @@ private:
     float* array2_d;
     std::chrono::steady_clock::time_point start;
     std::chrono::steady_clock::time_point end;
+    bool outputCSV;
 
     void execCPU(const float* currentArray, float* nextArray) const;
     void execGPU(const float* currentArray, float* nextArray) const;

@@ -18,8 +18,13 @@ int main(int argc, char **argv) {
             cout << answer;
             break;
         }
-        case config::CommandType::Graph:
-            throw NotImplementedException();
+        case config::CommandType::Graph: {
+            // always use CPU for graphing
+            conf.device = config::DeviceType::CPU;
+            Calculator calc(conf);
+            calc.exec();
+            break;
+        }
     }
 
     return 0;
