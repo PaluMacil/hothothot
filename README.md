@@ -1,14 +1,17 @@
 # hothothot
 
 The purpose of this application is to use CUDA cores of an Nvidia GPU to measure heat
-diffusion in an object across time slices.
+diffusion in an object across time. The more slices you divide an object into, the more 
+accurate the result.
 
 ## Structure
 
 ### Overview
 
 Nvidia GPUs provide use with a large number of CUDA cores which may be used to 
-do lots of calculations in parallel. 
+do lots of calculations in parallel. In this 
+
+![1D Object](1d-object.png)
 
 ### Usage
 
@@ -28,7 +31,8 @@ Commands:
         AmbientTemp (AMBIENT): ambient temperature (default 23)
         SourceTemp (SOURCE): temperature of heat source (default 100)
         Slices: the number of slices used (default 2500)
-    Graph: outputs data to csv for the given point (same parameters as TimePoint)
+    Graph: outputs to csv for the given point over time
+        same parameters as TimePoint but device is set to CPU
     Help: displays this message
 
 Example:
@@ -45,7 +49,7 @@ Example:
 #### CUDA
 
 You need the `nvcc` compiler which wraps GCC. The version available might 
-not support the lastest GCC on your system, but you can install multiple 
+not support the latest GCC on your system, but you can install multiple 
 versions and switch between them as needed. In my case, I'm on Ubuntu 20.04 
 and will use the nvcc available in the repos as well as gcc 7.
 
@@ -70,7 +74,7 @@ versions used. Check them with `gcc --version`, `g++ --version`, and
 ### Analysis
 
 When performing benchmarking with CUDA, I experienced no speedup and even 
-a slowdown before attempting omptimizations.
+a slowdown before attempting optimisations.
 
 #### Checking Correctness
 
@@ -109,6 +113,17 @@ TEST(Calculator, ExecGPU) {
     EXPECT_FLOAT_EQ(answer, 85.5276794);
 }
 ```
+
+#### Application Output
+
+Using the graph command, one can output the results to standard out. This command outputs
+50 comma separated data points to standard out. Using standard terminal commands, you may 
+pipe this to a file and open in an application such as Excel or LibreOffice Calc to create 
+a scatter plot like below. I chose to output over standard out because this application is 
+fairly simple and doesn't need to deal with file io when the command provides the correct 
+format to stream directly into a file. 
+
+![time-location chart](time-location-chart.png)
 
 #### Performance Evaluation
 
