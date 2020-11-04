@@ -27,7 +27,7 @@ private:
     std::chrono::steady_clock::time_point end;
 
     void execCPU(const float* currentArray, float* nextArray) const;
-    void execGPU(const float* currentArray, float* nextArray);
+    void execGPU(const float* currentArray, float* nextArray) const;
 };
 
 #endif //HOTHOTHOT_CALCULATOR_CUH
